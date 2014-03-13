@@ -3,6 +3,7 @@ UIView+Shake
 
 [![Build Status](https://travis-ci.org/andreamazz/UIView-Shake.png)](https://travis-ci.org/andreamazz/UITextField-Shake)
 [![Cocoapods](https://cocoapod-badges.herokuapp.com/v/UIView+Shake/badge.png)](http://cocoapods.org/?q=summary%3Auiview%20name%3Ashake%2A)
+[![Analytics](https://ga-beacon.appspot.com/UA-42282237-8/UIView-Shake/README)](https://github.com/igrigorik/ga-beacon)
 
 UIView category that adds a shake animation like the password field of the OsX login screen.
 
