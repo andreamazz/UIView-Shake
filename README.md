@@ -8,14 +8,14 @@ UIView category that adds a shake animation like the password field of the OsX l
 
 Screenshot
 --------------------
-![UIView+Shake](http://www.eflatgames.com/github/UITextField-Shake.gif)
+![UIView+Shake](http://www.eflatgames.com/github/UIView-Shake.gif)
 
 Setup with Cocoapods
 --------------------
-* Add ```pod 'UITextField+Shake'``` to your Podfile
+* Add ```pod 'UIView+Shake'``` to your Podfile
 * Run ```pod install```
 * Run ```open App.xcworkspace```
-* Import ```UITextField+Shake.h``` in your controller's header file
+* Import ```UIView+Shake.h``` in your controller's header file
 
 Usage
 --------------------
