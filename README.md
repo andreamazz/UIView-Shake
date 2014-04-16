@@ -9,7 +9,7 @@ UIView category that adds a shake animation like the password field of the OsX l
 
 Screenshot
 --------------------
-![UIView+Shake](http://www.eflatgames.com/github/UIView-Shake.gif)
+![UIView+Shake](https://raw.githubusercontent.com/andreamazz/UIView-Shake/master/screenshot.gif)
 
 Setup with Cocoapods
 --------------------
