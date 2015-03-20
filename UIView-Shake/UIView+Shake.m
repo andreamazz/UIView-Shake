@@ -12,20 +12,26 @@
 
 - (void)shake:(int)times withDelta:(CGFloat)delta
 {
-	[self _shake:times direction:1 currentTimes:0 withDelta:delta andSpeed:0.03 shakeDirection:ShakeDirectionHorizontal];
+	[self _shake:times direction:1 currentTimes:0 withDelta:delta andSpeed:0.03 shakeDirection:ShakeDirectionHorizontal completionHandler:^{}];
 }
 
 - (void)shake:(int)times withDelta:(CGFloat)delta andSpeed:(NSTimeInterval)interval
 {
-	[self _shake:times direction:1 currentTimes:0 withDelta:delta andSpeed:interval shakeDirection:ShakeDirectionHorizontal];
+	[self _shake:times direction:1 currentTimes:0 withDelta:delta andSpeed:interval shakeDirection:ShakeDirectionHorizontal completionHandler:^{}];
 }
 
 - (void)shake:(int)times withDelta:(CGFloat)delta andSpeed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection
 {
-    [self _shake:times direction:1 currentTimes:0 withDelta:delta andSpeed:interval shakeDirection:shakeDirection];
+    [self _shake:times direction:1 currentTimes:0 withDelta:delta andSpeed:interval shakeDirection:shakeDirection completionHandler:^{}];
 }
 
-- (void)_shake:(int)times direction:(int)direction currentTimes:(int)current withDelta:(CGFloat)delta andSpeed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection
+- (void)shake:(int)times withDelta:(CGFloat)delta andSpeed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completionHandler:(void (^)(void))completionHandler
+{
+    [self _shake:times direction:1 currentTimes:0 withDelta:delta andSpeed:interval shakeDirection:shakeDirection completionHandler:completionHandler];
+}
+
+
+- (void)_shake:(int)times direction:(int)direction currentTimes:(int)current withDelta:(CGFloat)delta andSpeed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completionHandler:(void (^)(void))completionHandler
 {
 	[UIView animateWithDuration:interval animations:^{
 		self.layer.affineTransform = (shakeDirection == ShakeDirectionHorizontal) ? CGAffineTransformMakeTranslation(delta * direction, 0) : CGAffineTransformMakeTranslation(0, delta * direction);
@@ -33,6 +39,8 @@
 		if(current >= times) {
 			[UIView animateWithDuration:interval animations:^{
 				self.layer.affineTransform = CGAffineTransformIdentity;
+			} completion:^(BOOL finished){
+				completionHandler();
 			}];
 			return;
 		}
@@ -41,7 +49,8 @@
 		currentTimes:current + 1
 		   withDelta:delta
 			andSpeed:interval
-	  shakeDirection:shakeDirection];
+	  shakeDirection:shakeDirection
+   completionHandler:completionHandler];
 	}];
 }
 

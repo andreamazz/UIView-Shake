@@ -48,4 +48,16 @@ typedef NS_ENUM(NSInteger, ShakeDirection) {
  */
 - (void)shake:(int)times withDelta:(CGFloat)delta andSpeed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection;
 
+/** Shake the UIView at a custom speed
+ *
+ * Shake the text field a given number of times with a given speed, with a completion handler
+ *
+ * @param times The number of shakes
+ * @param delta The width of the shake
+ * @param interval The duration of one shake
+ * @param direction of the shake
+ * @param completionHandler to be called when the view is done shaking
+ */
+- (void)shake:(int)times withDelta:(CGFloat)delta andSpeed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completionHandler:(void(^)(void))completionHandler;
+
 @end

@@ -46,7 +46,10 @@
 		[obj shake:[self.textShakes.text intValue]
 		 withDelta:[self.textDelta.text floatValue]
 		  andSpeed:[self.textSpeed.text floatValue]
-	shakeDirection:(self.shakeDirection.selectedSegmentIndex == 0) ? ShakeDirectionHorizontal : ShakeDirectionVertical];
+	shakeDirection:(self.shakeDirection.selectedSegmentIndex == 0) ? ShakeDirectionHorizontal : ShakeDirectionVertical
+ completionHandler:^{
+     NSLog(@"================> finished!");
+ }];
 	}];
 }
 
