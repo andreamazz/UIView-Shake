@@ -12,24 +12,23 @@
 
 - (void)shake:(int)times withDelta:(CGFloat)delta
 {
-	[self _shake:times direction:1 currentTimes:0 withDelta:delta andSpeed:0.03 shakeDirection:ShakeDirectionHorizontal completionHandler:^{}];
+	[self _shake:times direction:1 currentTimes:0 withDelta:delta andSpeed:0.03 shakeDirection:ShakeDirectionHorizontal completionHandler:nil];
 }
 
 - (void)shake:(int)times withDelta:(CGFloat)delta andSpeed:(NSTimeInterval)interval
 {
-	[self _shake:times direction:1 currentTimes:0 withDelta:delta andSpeed:interval shakeDirection:ShakeDirectionHorizontal completionHandler:^{}];
+	[self _shake:times direction:1 currentTimes:0 withDelta:delta andSpeed:interval shakeDirection:ShakeDirectionHorizontal completionHandler:nil];
 }
 
 - (void)shake:(int)times withDelta:(CGFloat)delta andSpeed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection
 {
-    [self _shake:times direction:1 currentTimes:0 withDelta:delta andSpeed:interval shakeDirection:shakeDirection completionHandler:^{}];
+    [self _shake:times direction:1 currentTimes:0 withDelta:delta andSpeed:interval shakeDirection:shakeDirection completionHandler:nil];
 }
 
 - (void)shake:(int)times withDelta:(CGFloat)delta andSpeed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completionHandler:(void (^)(void))completionHandler
 {
     [self _shake:times direction:1 currentTimes:0 withDelta:delta andSpeed:interval shakeDirection:shakeDirection completionHandler:completionHandler];
 }
-
 
 - (void)_shake:(int)times direction:(int)direction currentTimes:(int)current withDelta:(CGFloat)delta andSpeed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completionHandler:(void (^)(void))completionHandler
 {
