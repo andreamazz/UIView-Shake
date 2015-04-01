@@ -39,7 +39,9 @@
 			[UIView animateWithDuration:interval animations:^{
 				self.layer.affineTransform = CGAffineTransformIdentity;
 			} completion:^(BOOL finished){
-				completionHandler();
+				if (completionHandler != nil) {
+					completionHandler();
+				}
 			}];
 			return;
 		}
