@@ -9,15 +9,21 @@ UIView category that adds a shake animation like the password field of the OsX l
 
 Screenshot
 --------------------
-![UIView+Shake](https://raw.githubusercontent.com/andreamazz/UIView-Shake/master/screenshot.gif)
+![UIView+Shake](https://raw.githubusercontent.com/andreamazz/UIView-Shake/master/assets/screenshot.gif)
 
 Setup with Cocoapods
 --------------------
 * Add ```pod 'UIView+Shake'``` to your Podfile
 * Run ```pod install```
 * Run ```open App.xcworkspace```
-* Import ```UIView+Shake.h``` in your controller's header file
 
+###Objective-C
+Import ```UIVIew+Shake.h``` in your controller's header file
+###Swift
+If you are using `use_frameworks!` in your Podfile, use this import:
+```swift
+import UIView_Shake
+```
 Usage
 --------------------
 ```objc
@@ -40,16 +46,9 @@ Usage
 ];
 ```
 
-Changelog
-==================
-
-0.1
---------------------
-First release
-
 MIT License
 ==================
-	Copyright (c) 2014 Andrea Mazzini. All rights reserved.
+	Copyright (c) 2015 Andrea Mazzini. All rights reserved.
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
