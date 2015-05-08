@@ -45,8 +45,8 @@
     [self.view.subviews enumerateObjectsUsingBlock:^(UIView* obj, NSUInteger idx, BOOL *stop) {
         [obj shake:[self.textShakes.text intValue]
          withDelta:[self.textDelta.text floatValue]
-          andSpeed:[self.textSpeed.text floatValue]
-    shakeDirection:(self.shakeDirection.selectedSegmentIndex == 0) ? ShakeDirectionHorizontal : ShakeDirectionVertical completionHandler:^{
+             speed:[self.textSpeed.text floatValue]
+    shakeDirection:(self.shakeDirection.selectedSegmentIndex == 0) ? ShakeDirectionHorizontal : ShakeDirectionVertical completion:^{
         NSLog(@"done!");
     }];
     }];

@@ -19,45 +19,72 @@ typedef NS_ENUM(NSInteger, ShakeDirection) {
  */
 
 /** Shake the UIView
+*
+* Shake the view a default number of times
+*/
+- (void)shake;
+
+/** Shake the UIView
  *
- * Shake the text field a given number of times
+ * Shake the view a given number of times
  *
  * @param times The number of shakes
  * @param delta The width of the shake
  */
 - (void)shake:(int)times withDelta:(CGFloat)delta;
 
+/** Shake the UIView
+ *
+ * Shake the view a given number of times
+ *
+ * @param times The number of shakes
+ * @param delta The width of the shake
+ * @param handler A block object to be executed when the shake sequence ends
+ */
+- (void)shake:(int)times withDelta:(CGFloat)delta completion:(void((^)()))handler;
+
 /** Shake the UIView at a custom speed
  *
- * Shake the text field a given number of times with a given speed
+ * Shake the view a given number of times with a given speed
  *
  * @param times The number of shakes
  * @param delta The width of the shake
  * @param interval The duration of one shake
  */
-- (void)shake:(int)times withDelta:(CGFloat)delta andSpeed:(NSTimeInterval)interval;
+- (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval;
 
 /** Shake the UIView at a custom speed
  *
- * Shake the text field a given number of times with a given speed
+ * Shake the view a given number of times with a given speed
+ *
+ * @param times The number of shakes
+ * @param delta The width of the shake
+ * @param interval The duration of one shake
+ * @param handler A block object to be executed when the shake sequence ends
+ */
+- (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval completion:(void((^)()))handler;
+
+/** Shake the UIView at a custom speed
+ *
+ * Shake the view a given number of times with a given speed
  *
  * @param times The number of shakes
  * @param delta The width of the shake
  * @param interval The duration of one shake
  * @param direction of the shake
  */
-- (void)shake:(int)times withDelta:(CGFloat)delta andSpeed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection;
+- (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection;
 
 /** Shake the UIView at a custom speed
  *
- * Shake the text field a given number of times with a given speed, with a completion handler
+ * Shake the view a given number of times with a given speed, with a completion handler
  *
  * @param times The number of shakes
  * @param delta The width of the shake
  * @param interval The duration of one shake
  * @param direction of the shake
- * @param completionHandler to be called when the view is done shaking
+ * @param completion to be called when the view is done shaking
  */
-- (void)shake:(int)times withDelta:(CGFloat)delta andSpeed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completionHandler:(void(^)(void))completionHandler;
+- (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completion:(void(^)(void))completion;
 
 @end

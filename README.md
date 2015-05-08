@@ -1,18 +1,17 @@
-UIView+Shake
-=============
+<p align="center">
+  <img src="assets/logo.png"/>
+</p>
 
-[![Build Status](https://travis-ci.org/andreamazz/UIView-Shake.png)](https://travis-ci.org/andreamazz/UITextField-Shake)
-[![Cocoapods](https://cocoapod-badges.herokuapp.com/v/UIView+Shake/badge.png)](http://cocoapods.org/?q=summary%3Auiview%20name%3Ashake%2A)
-[![Analytics](https://ga-beacon.appspot.com/UA-42282237-8/UIView-Shake/README)](https://github.com/igrigorik/ga-beacon)
+[![Build Status](https://travis-ci.org/andreamazz/UIView-Shake.svg)](https://travis-ci.org/andreamazz/UITextField-Shake)
+[![Cocoapods](https://cocoapod-badges.herokuapp.com/v/UIView+Shake/badge.svg)](http://cocoapods.org/?q=summary%3Auiview%20name%3Ashake%2A)
+[![Coverage Status](https://coveralls.io/repos/andreamazz/UIView-Shake/badge.svg)](https://coveralls.io/r/andreamazz/UIView-Shake)
 
-UIView category that adds a shake animation like the password field of the OsX login screen.
+UIView category that adds a shake animation like the password field of the OSX login screen.
 
-Screenshot
---------------------
+##Screenshot
 ![UIView+Shake](https://raw.githubusercontent.com/andreamazz/UIView-Shake/master/assets/screenshot.gif)
 
-Setup with Cocoapods
---------------------
+##Setup with Cocoapods
 * Add ```pod 'UIView+Shake'``` to your Podfile
 * Run ```pod install```
 * Run ```open App.xcworkspace```
@@ -24,9 +23,11 @@ If you are using `use_frameworks!` in your Podfile, use this import:
 ```swift
 import UIView_Shake
 ```
-Usage
---------------------
+##Usage
 ```objc
+// Shake with default values
+[self.view shake];
+
 // Shake with the default speed
 [self.view shake:10   // 10 times
        withDelta:5    // 5 points wide
@@ -46,8 +47,7 @@ Usage
 ];
 ```
 
-MIT License
-==================
+#MIT License
 	Copyright (c) 2015 Andrea Mazzini. All rights reserved.
 
 	Permission is hereby granted, free of charge, to any person obtaining a
