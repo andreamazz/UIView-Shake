@@ -42,7 +42,6 @@
 	[UIView animateWithDuration:interval animations:^{
 		self.layer.affineTransform = (shakeDirection == ShakeDirectionHorizontal) ? CGAffineTransformMakeTranslation(delta * direction, 0) : CGAffineTransformMakeTranslation(0, delta * direction);
 	} completion:^(BOOL finished) {
-        NSLog(@"%d, %d", current, times);
 		if(current >= times) {
 			[UIView animateWithDuration:interval animations:^{
 				self.layer.affineTransform = CGAffineTransformIdentity;
