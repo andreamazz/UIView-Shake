@@ -17,7 +17,7 @@ UIView category that adds a shake animation like the password field of the OSX l
 * Run ```open App.xcworkspace```
 
 ###Objective-C
-Import ```UIVIew+Shake.h``` in your controller's header file
+Import ```UIView+Shake.h``` in your controller's header file
 ###Swift
 If you are using `use_frameworks!` in your Podfile, use this import:
 ```swift
