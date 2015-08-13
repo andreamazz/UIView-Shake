@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5512F35BA683D60583064EF5 /* libPods-SampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC8D35F309D41805795E430 /* libPods-SampleTests.a */; };
+		650050B01B7CC26500DC8058 /* UIView+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = 650050AF1B7CC26500DC8058 /* UIView+Shake.m */; };
 		65C825B118A67AB1004F55EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C825B018A67AB1004F55EC /* Foundation.framework */; };
 		65C825B318A67AB1004F55EC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C825B218A67AB1004F55EC /* CoreGraphics.framework */; };
 		65C825B518A67AB1004F55EC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C825B418A67AB1004F55EC /* UIKit.framework */; };
@@ -22,7 +23,6 @@
 		65C825D218A67AB1004F55EC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C825B418A67AB1004F55EC /* UIKit.framework */; };
 		65C825DA18A67AB1004F55EC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65C825D818A67AB1004F55EC /* InfoPlist.strings */; };
 		65C825DC18A67AB1004F55EC /* UIViewShakeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C825DB18A67AB1004F55EC /* UIViewShakeTests.m */; };
-		65F64EA318D1D11B0041FE88 /* UIView+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F64EA218D1D11B0041FE88 /* UIView+Shake.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		2CBCA4AC0236464ED8E29C72 /* Pods-SampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SampleTests/Pods-SampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		650050AE1B7CC26500DC8058 /* UIView+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Shake.h"; path = "../Source/UIView+Shake.h"; sourceTree = "<group>"; };
+		650050AF1B7CC26500DC8058 /* UIView+Shake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Shake.m"; path = "../Source/UIView+Shake.m"; sourceTree = "<group>"; };
 		65C825AD18A67AB1004F55EC /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65C825B018A67AB1004F55EC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		65C825B218A67AB1004F55EC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -56,8 +58,6 @@
 		65C825D718A67AB1004F55EC /* SampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SampleTests-Info.plist"; sourceTree = "<group>"; };
 		65C825D918A67AB1004F55EC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		65C825DB18A67AB1004F55EC /* UIViewShakeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewShakeTests.m; sourceTree = "<group>"; };
-		65F64EA118D1D11B0041FE88 /* UIView+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shake.h"; sourceTree = "<group>"; };
-		65F64EA218D1D11B0041FE88 /* UIView+Shake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shake.m"; sourceTree = "<group>"; };
 		82BAE733C77B21420303C547 /* Pods-SampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SampleTests/Pods-SampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ABC8D35F309D41805795E430 /* libPods-SampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -166,8 +166,8 @@
 		65F64EA018D1D11B0041FE88 /* UIView-Shake */ = {
 			isa = PBXGroup;
 			children = (
-				65F64EA118D1D11B0041FE88 /* UIView+Shake.h */,
-				65F64EA218D1D11B0041FE88 /* UIView+Shake.m */,
+				650050AE1B7CC26500DC8058 /* UIView+Shake.h */,
+				650050AF1B7CC26500DC8058 /* UIView+Shake.m */,
 			);
 			name = "UIView-Shake";
 			path = "../../UIView-Shake";
@@ -316,7 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65C825C118A67AB1004F55EC /* AMAppDelegate.m in Sources */,
-				65F64EA318D1D11B0041FE88 /* UIView+Shake.m in Sources */,
+				650050B01B7CC26500DC8058 /* UIView+Shake.m in Sources */,
 				65C825C718A67AB1004F55EC /* AMViewController.m in Sources */,
 				65C825BD18A67AB1004F55EC /* main.m in Sources */,
 			);

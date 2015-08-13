@@ -8,8 +8,14 @@
 
 @import UIKit;
 
+/** @enum ShakeDirection
+ *
+ * Enum that specifies the direction of the shake
+ */
 typedef NS_ENUM(NSInteger, ShakeDirection) {
-    ShakeDirectionHorizontal = 0,
+    /** Shake left and right */
+    ShakeDirectionHorizontal,
+    /** Shake up and down */
     ShakeDirectionVertical
 };
 
@@ -21,9 +27,9 @@ typedef NS_ENUM(NSInteger, ShakeDirection) {
  */
 
 /** Shake the UIView
-*
-* Shake the view a default number of times
-*/
+ *
+ * Shake the view a default number of times
+ */
 - (void)shake;
 
 /** Shake the UIView
