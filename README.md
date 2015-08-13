@@ -5,6 +5,7 @@
 [![Build Status](https://travis-ci.org/andreamazz/UIView-Shake.svg)](https://travis-ci.org/andreamazz/UITextField-Shake)
 [![Cocoapods](https://cocoapod-badges.herokuapp.com/v/UIView+Shake/badge.svg)](http://cocoapods.org/?q=summary%3Auiview%20name%3Ashake%2A)
 [![Coverage Status](https://coveralls.io/repos/andreamazz/UIView-Shake/badge.svg?branch=master&service=github)](https://coveralls.io/github/andreamazz/UIView-Shake?branch=master)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 UIView category that adds a shake animation like the password field of the OSX login screen.
 
@@ -23,10 +24,14 @@ If you are using `use_frameworks!` in your Podfile, use this import:
 ```swift
 import UIView_Shake
 ```
+
 ##Usage
+
+###In Objective-C
+
 ```objc
-// Shake with default values
-[self.view shake];
+// Shake
+[[self.view] shake];
 
 // Shake with the default speed
 [self.view shake:10   // 10 times
@@ -36,16 +41,59 @@ import UIView_Shake
 // Shake with a custom speed
 [self.view shake:10   // 10 times
        withDelta:5    // 5 points wide
-        andSpeed:0.03 // 30ms per shake
+           speed:0.03 // 30ms per shake
 ];
 
 // Shake with a custom speed and direction
 [self.view shake:10   // 10 times
        withDelta:5    // 5 points wide
-        andSpeed:0.03 // 30ms per shake
+           speed:0.03 // 30ms per shake
   shakeDirection:ShakeDirectionVertical
 ];
 ```
+
+###In Swift
+
+```swift
+// Shake
+self.view.shake()
+        
+// Shake with the default speed
+self.view.shake(10,              // 10 times
+                withDelta: 5.0   // 5 points wide
+)
+        
+// Shake with a custom speed
+self.view.shake(10,              // 10 times
+                withDelta: 5.0,  // 5 points wide
+                speed: 0.03      // 30ms per shake
+)
+        
+// Shake with a custom speed and direction
+self.view.shake(10,              // 10 times
+                withDelta: 5.0,  // 5 points wide
+                speed: 0.03,     // 30ms per shake
+                shakeDirection: ShakeDirection.Vertical
+)
+```
+
+##Completion Handler
+You can also pass a completion block that will be performed as soon as the shake animation stops
+```objc
+- (void)shake:(int)times withDelta:(CGFloat)delta completion:(void((^)()))handler;
+- (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval completion:(void((^)()))handler;
+- (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completion:(void((^)()))handler;
+```
+or in Swift using the trailing closure syntax:
+```swift
+view.shake(10, withDelta: 5) {
+    println("done")
+}
+```
+
+#Author
+[Andrea Mazzini](https://twitter.com/theandreamazz)
+
 
 #MIT License
 	Copyright (c) 2015 Andrea Mazzini. All rights reserved.
