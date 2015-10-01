@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		650050981B7CC21A00DC8058 /* UIView+Shake.h in Headers */ = {isa = PBXBuildFile; fileRef = 650050971B7CC21A00DC8058 /* UIView+Shake.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		650050981B7CC21A00DC8058 /* UIView+Shake.h in Headers */ = {isa = PBXBuildFile; fileRef = 650050971B7CC21A00DC8058 /* UIView+Shake.h */; };
 		650050B41B7CC29400DC8058 /* UIView+Shake.h in Headers */ = {isa = PBXBuildFile; fileRef = 650050B21B7CC29400DC8058 /* UIView+Shake.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		650050B51B7CC29400DC8058 /* UIView+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = 650050B31B7CC29400DC8058 /* UIView+Shake.m */; };
 /* End PBXBuildFile section */
