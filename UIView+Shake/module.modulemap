@@ -1,0 +1,8 @@
+framework module UIView_Shake {
+    umbrella header "UIView+Shake.h"
+
+    header "UIView+Shake.h"
+
+    export *
+    module * { export * }
+}
