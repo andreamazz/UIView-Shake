@@ -1,8 +1,8 @@
-#import <Specta/Specta.h>
-#import <Expecta/Expecta.h>
-#import <FBSnapshotTestCase/FBSnapshotTestCase.h>
-#import <Expecta+Snapshots/EXPMatchers+FBSnapshotTest.h>
-#import <OCMock/OCMock.h>
+@import Specta;
+@import Expecta;
+@import FBSnapshotTestCase;
+@import Expecta_Snapshots;
+@import OCMock;
 
 #import "UIView+Shake.h"
 

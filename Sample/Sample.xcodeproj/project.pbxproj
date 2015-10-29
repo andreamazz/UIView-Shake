@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5512F35BA683D60583064EF5 /* libPods-SampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC8D35F309D41805795E430 /* libPods-SampleTests.a */; };
 		650050B01B7CC26500DC8058 /* UIView+Shake.m in Sources */ = {isa = PBXBuildFile; fileRef = 650050AF1B7CC26500DC8058 /* UIView+Shake.m */; };
 		65C825B118A67AB1004F55EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C825B018A67AB1004F55EC /* Foundation.framework */; };
 		65C825B318A67AB1004F55EC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C825B218A67AB1004F55EC /* CoreGraphics.framework */; };
@@ -23,6 +22,7 @@
 		65C825D218A67AB1004F55EC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C825B418A67AB1004F55EC /* UIKit.framework */; };
 		65C825DA18A67AB1004F55EC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65C825D818A67AB1004F55EC /* InfoPlist.strings */; };
 		65C825DC18A67AB1004F55EC /* UIViewShakeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C825DB18A67AB1004F55EC /* UIViewShakeTests.m */; };
+		961B62834DADFCD44A5A9085 /* Pods_SampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0CC30F727FCD83B3104F5C5 /* Pods_SampleTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +59,7 @@
 		65C825D918A67AB1004F55EC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		65C825DB18A67AB1004F55EC /* UIViewShakeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewShakeTests.m; sourceTree = "<group>"; };
 		82BAE733C77B21420303C547 /* Pods-SampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SampleTests/Pods-SampleTests.debug.xcconfig"; sourceTree = "<group>"; };
-		ABC8D35F309D41805795E430 /* libPods-SampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0CC30F727FCD83B3104F5C5 /* Pods_SampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +80,7 @@
 				65C825D018A67AB1004F55EC /* XCTest.framework in Frameworks */,
 				65C825D218A67AB1004F55EC /* UIKit.framework in Frameworks */,
 				65C825D118A67AB1004F55EC /* Foundation.framework in Frameworks */,
-				5512F35BA683D60583064EF5 /* libPods-SampleTests.a in Frameworks */,
+				961B62834DADFCD44A5A9085 /* Pods_SampleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +114,7 @@
 				65C825B218A67AB1004F55EC /* CoreGraphics.framework */,
 				65C825B418A67AB1004F55EC /* UIKit.framework */,
 				65C825CF18A67AB1004F55EC /* XCTest.framework */,
-				ABC8D35F309D41805795E430 /* libPods-SampleTests.a */,
+				A0CC30F727FCD83B3104F5C5 /* Pods_SampleTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -211,6 +211,7 @@
 				65C825CB18A67AB1004F55EC /* Frameworks */,
 				65C825CC18A67AB1004F55EC /* Resources */,
 				9EE2CD2107DB535338C25825 /* Copy Pods Resources */,
+				0483F166F110BFBB497E71B5 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -229,7 +230,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = AM;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Fancy Pixel";
 				TargetAttributes = {
 					65C825CD18A67AB1004F55EC = {
@@ -278,6 +279,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0483F166F110BFBB497E71B5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SampleTests/Pods-SampleTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4BE4E15578E3E14AFAB15720 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -386,6 +402,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
@@ -402,7 +419,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -436,7 +453,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -450,6 +467,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sample/Sample-Prefix.pch";
 				INFOPLIST_FILE = "Sample/Sample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "it.fancypixel.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -463,6 +482,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sample/Sample-Prefix.pch";
 				INFOPLIST_FILE = "Sample/Sample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "it.fancypixel.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -485,6 +506,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "SampleTests/SampleTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "it.fancypixel.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -504,6 +526,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sample/Sample-Prefix.pch";
 				INFOPLIST_FILE = "SampleTests/SampleTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "it.fancypixel.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

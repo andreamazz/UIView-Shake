@@ -3,11 +3,12 @@ target 'Sample' do
 end
 
 target 'SampleTests' do
-  pod 'FBSnapshotTestCase'
-  pod 'Expecta+Snapshots'
-  pod 'Specta'
-  pod 'Expecta'
-  pod 'OCMock'
+  pod 'FBSnapshotTestCase', '~> 2.0.7'
+  pod 'Expecta+Snapshots', '~> 2.0.0'
+  pod 'Specta', '~> 1.0.4'
+  pod 'Expecta', '~> 1.0.3'
+  pod 'OCMock', '~> 3.2'
 end
 
 inhibit_all_warnings!
+use_frameworks!
