@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Fancy Pixel. All rights reserved.
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 /** @enum ShakeDirection
  *
