@@ -2,10 +2,15 @@
 All notable changes to this project will be documented in this file.
 `UIView-Shake` adheres to [Semantic Versioning](http://semver.org/).
 
-- `1.1.x` Releases - [1.1.0](#110) | [1.1.1](#111) | [1.1.2](#112) 
+- `1.1.x` Releases - [1.1.0](#110) | [1.1.1](#111) | [1.1.2](#112) | [1.1.3](#113)  
 - `1.0.x` Releases - [1.0](#10) | [1.0.1](#101) | [1.0.2](#102) 
 
 ---
+
+## [1.1.3](https://github.com/andreamazz/UIView-Shake/releases/tag/1.1.3)
+
+### Fixed 
+- Changed import notation to support Objective-C++ projects. Thanks to [Guillaume Algis](https://github.com/guillaume-algis)  
 
 ## [1.1.2](https://github.com/andreamazz/UIView-Shake/releases/tag/1.1.2)
 
