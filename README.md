@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png"/>
+  <img width="420" height="240" src="assets/logo.png"/>
 </p>
 
 [![Build Status](https://travis-ci.org/andreamazz/UIView-Shake.svg)](https://travis-ci.org/andreamazz/UIView-Shake)
@@ -8,6 +8,12 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 UIView category that adds a shake animation like the password field of the OSX login screen.
+
+<p align="center">
+  <a href='https://appetize.io/app/d4gkmq6mvpb9j2g4wyb077nj2g' alt='Live demo'>
+    <img width="50" height="60" src="assets/demo.png"/>
+  </a>
+</p>
 
 ##Screenshot
 ![UIView+Shake](https://raw.githubusercontent.com/andreamazz/UIView-Shake/master/assets/screenshot.gif)
@@ -92,7 +98,12 @@ view.shake(10, withDelta: 5) {
 ```
 
 #Author
-[Andrea Mazzini](https://twitter.com/theandreamazz)
+[Andrea Mazzini](https://twitter.com/theandreamazz). I'm available for freelance work, feel free to contact me. 
+
+Want to support the development of [these free libraries](https://cocoapods.org/owners/734)? Buy me a coffee ☕️ via [Paypal](https://www.paypal.me/andreamazzini).  
+
+#Contributors
+Thanks to [everyone](https://github.com/andreamazz/UIView-Shake/graphs/contributors) kind enough to submit a pull request. 
 
 
 #MIT License
