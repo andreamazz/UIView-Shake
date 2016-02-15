@@ -3,7 +3,7 @@
 </p>
 
 [![Build Status](https://travis-ci.org/andreamazz/UIView-Shake.svg)](https://travis-ci.org/andreamazz/UIView-Shake)
-[![Cocoapods](https://cocoapod-badges.herokuapp.com/v/UIView+Shake/badge.svg)](http://cocoapods.org/?q=summary%3Auiview%20name%3Ashake%2A)
+[![CocoaPods](https://cocoapod-badges.herokuapp.com/v/UIView+Shake/badge.svg)](http://cocoapods.org/?q=summary%3Auiview%20name%3Ashake%2A)
 [![Coverage Status](https://coveralls.io/repos/andreamazz/UIView-Shake/badge.svg?branch=master&service=github)](https://coveralls.io/github/andreamazz/UIView-Shake?branch=master)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
@@ -18,7 +18,7 @@ UIView category that adds a shake animation like the password field of the OSX l
 ##Screenshot
 ![UIView+Shake](https://raw.githubusercontent.com/andreamazz/UIView-Shake/master/assets/screenshot.gif)
 
-##Setup with Cocoapods
+##Setup with CocoaPods
 * Add ```pod 'UIView+Shake'``` to your Podfile
 * Run ```pod install```
 * Run ```open App.xcworkspace```
