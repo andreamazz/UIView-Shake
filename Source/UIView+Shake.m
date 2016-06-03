@@ -11,27 +11,27 @@
 @implementation UIView (Shake)
 
 - (void)shake {
-    [self _shake:10 direction:1 currentTimes:0 withDelta:5 speed:0.03 shakeDirection:ShakeDirectionHorizontal completion:nil];
+    [self shake:10 withDelta:5 speed:0.03];
 }
 
 - (void)shake:(int)times withDelta:(CGFloat)delta {
-	[self _shake:times direction:1 currentTimes:0 withDelta:delta speed:0.03 shakeDirection:ShakeDirectionHorizontal completion:nil];
+    [self shake:times withDelta:delta completion:nil];
 }
 
 - (void)shake:(int)times withDelta:(CGFloat)delta completion:(nullable void (^)(void))handler {
-    [self _shake:times direction:1 currentTimes:0 withDelta:delta speed:0.03 shakeDirection:ShakeDirectionHorizontal completion:handler];
+    [self shake:times withDelta:delta speed:0.03 completion:handler];
 }
 
 - (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval {
-	[self _shake:times direction:1 currentTimes:0 withDelta:delta speed:interval shakeDirection:ShakeDirectionHorizontal completion:nil];
+    [self shake:times withDelta:delta speed:interval completion:nil];
 }
 
 - (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval completion:(nullable void (^)(void))handler {
-    [self _shake:times direction:1 currentTimes:0 withDelta:delta speed:interval shakeDirection:ShakeDirectionHorizontal completion:handler];
+    [self shake:times withDelta:delta speed:interval shakeDirection:ShakeDirectionHorizontal completion:handler];
 }
 
 - (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection {
-    [self _shake:times direction:1 currentTimes:0 withDelta:delta speed:interval shakeDirection:shakeDirection completion:nil];
+    [self shake:times withDelta:delta speed:interval shakeDirection:shakeDirection completion:nil];
 }
 
 - (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completion:(nullable void (^)(void))completion {
