@@ -39,12 +39,13 @@
 }
 
 - (void)_shake:(int)times direction:(int)direction currentTimes:(int)current withDelta:(CGFloat)delta speed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completion:(void (^)(void))completionHandler {
+    __weak UIView *weakSelf = self;
 	[UIView animateWithDuration:interval animations:^{
-		self.layer.affineTransform = (shakeDirection == ShakeDirectionHorizontal) ? CGAffineTransformMakeTranslation(delta * direction, 0) : CGAffineTransformMakeTranslation(0, delta * direction);
+		weakSelf.layer.affineTransform = (shakeDirection == ShakeDirectionHorizontal) ? CGAffineTransformMakeTranslation(delta * direction, 0) : CGAffineTransformMakeTranslation(0, delta * direction);
 	} completion:^(BOOL finished) {
 		if(current >= times) {
 			[UIView animateWithDuration:interval animations:^{
-				self.layer.affineTransform = CGAffineTransformIdentity;
+				weakSelf.layer.affineTransform = CGAffineTransformIdentity;
 			} completion:^(BOOL finished){
 				if (completionHandler != nil) {
 					completionHandler();
@@ -52,7 +53,7 @@
 			}];
 			return;
 		}
-		[self _shake:(times - 1)
+		[weakSelf _shake:(times - 1)
 		   direction:direction * -1
 		currentTimes:current + 1
 		   withDelta:delta
