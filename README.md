@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.org/andreamazz/UIView-Shake.svg)](https://travis-ci.org/andreamazz/UIView-Shake)
 [![CocoaPods](https://cocoapod-badges.herokuapp.com/v/UIView+Shake/badge.svg)](http://cocoapods.org/?q=summary%3Auiview%20name%3Ashake%2A)
-[![Coverage Status](https://coveralls.io/repos/andreamazz/UIView-Shake/badge.svg?branch=master&service=github)](https://coveralls.io/github/andreamazz/UIView-Shake?branch=master)
+[![codecov](https://codecov.io/gh/andreamazz/UIView-Shake/branch/master/graph/badge.svg)](https://codecov.io/gh/andreamazz/UIView-Shake)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 UIView category that adds a shake animation like the password field of the OSX login screen.
