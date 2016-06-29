@@ -3,10 +3,9 @@ target 'Sample' do
 end
 
 target 'SampleTests' do
-  pod 'FBSnapshotTestCase', '~> 2.0.7'
-  pod 'Expecta+Snapshots', '~> 2.0.0'
-  pod 'Specta', '~> 1.0.4'
-  pod 'Expecta', '~> 1.0.3'
+  pod 'Expecta+Snapshots', '~> 3.0.0'
+  pod 'Specta', '~> 1.0.5'
+  pod 'Expecta', '~> 1.0.5'
   pod 'OCMock', '~> 3.2'
 end
 

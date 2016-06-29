@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2005-2015 Erik Doernenburg and contributors
+ *  Copyright (c) 2005-2016 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -55,7 +55,18 @@
 - (void)stopMocking
 {
     if(originalMetaClass != nil)
+    {
+        /* The mocked class has the meta class of a dynamically created subclass as its meta class,
+           but we need a reference to the subclass to dispose it. Asking the meta class for its
+           class name returns the actual class name, which we can then use to look up the class...
+        */
+        const char *createdSubclassName = object_getClassName(mockedClass);
+        Class createdSubclass = objc_lookUpClass(createdSubclassName);
+
         [self restoreMetaClass];
+
+        objc_disposeClassPair(createdSubclass);
+    }
     [super stopMocking];
 }
 

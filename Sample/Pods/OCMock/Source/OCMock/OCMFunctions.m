@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2014-2015 Erik Doernenburg and contributors
+ *  Copyright (c) 2014-2016 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -35,35 +35,67 @@
 
 #pragma mark  Functions related to ObjC type system
 
-BOOL OCMIsObjectType(const char *objCType)
-{
-    objCType = OCMTypeWithoutQualifiers(objCType);
-
-    if(strcmp(objCType, @encode(id)) == 0 || strcmp(objCType, @encode(Class)) == 0)
-        return YES;
-
-    // if the returnType is a typedef to an object, it has the form ^{OriginClass=#}
-    NSString *regexString = @"^\\^\\{(.*)=#.*\\}";
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString options:0 error:NULL];
-    NSString *type = [NSString stringWithCString:objCType encoding:NSASCIIStringEncoding];
-    if([regex numberOfMatchesInString:type options:0 range:NSMakeRange(0, type.length)] > 0)
-        return YES;
-
-    // if the return type is a block we treat it like an object
-    // TODO: if the runtime were to encode the block's argument and/or return types, this test would not be sufficient
-    if(strcmp(objCType, @encode(void(^)())) == 0)
-        return YES;
-
-    return NO;
-}
-
-
 const char *OCMTypeWithoutQualifiers(const char *objCType)
 {
     while(strchr("rnNoORV", objCType[0]) != NULL)
         objCType += 1;
     return objCType;
 }
+
+
+static BOOL OCMIsUnqualifiedClassType(const char *unqualifiedObjCType)
+{
+    return (strcmp(unqualifiedObjCType, @encode(Class)) == 0);
+}
+
+BOOL OCMIsClassType(const char *objCType)
+{
+    return OCMIsUnqualifiedClassType(OCMTypeWithoutQualifiers(objCType));
+}
+
+
+static BOOL OCMIsUnqualifiedBlockType(const char *unqualifiedObjCType)
+{
+    char blockType[] = @encode(void(^)());
+    if(strcmp(unqualifiedObjCType, blockType) == 0)
+        return YES;
+
+    // sometimes block argument/return types are tacked onto the type, in angle brackets
+    if(strncmp(unqualifiedObjCType, blockType, sizeof(blockType) - 1) == 0 && unqualifiedObjCType[sizeof(blockType) - 1] == '<')
+        return YES;
+
+    return NO;
+}
+
+BOOL OCMIsBlockType(const char *objCType)
+{
+    return OCMIsUnqualifiedBlockType(OCMTypeWithoutQualifiers(objCType));
+}
+
+
+BOOL OCMIsObjectType(const char *objCType)
+{
+    const char *unqualifiedObjCType = OCMTypeWithoutQualifiers(objCType);
+
+    char objectType[] = @encode(id);
+    if(strcmp(unqualifiedObjCType, objectType) == 0 || OCMIsUnqualifiedClassType(unqualifiedObjCType))
+        return YES;
+
+    // sometimes the name of an object's class is tacked onto the type, in double quotes
+    if(strncmp(unqualifiedObjCType, objectType, sizeof(objectType) - 1) == 0 && unqualifiedObjCType[sizeof(objectType) - 1] == '"')
+        return YES;
+
+    // if the returnType is a typedef to an object, it has the form ^{OriginClass=#}
+    NSString *regexString = @"^\\^\\{(.*)=#.*\\}";
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString options:0 error:NULL];
+    NSString *type = [NSString stringWithCString:unqualifiedObjCType encoding:NSASCIIStringEncoding];
+    if([regex numberOfMatchesInString:type options:0 range:NSMakeRange(0, type.length)] > 0)
+        return YES;
+
+    // if the return type is a block we treat it like an object
+    return OCMIsUnqualifiedBlockType(unqualifiedObjCType);
+}
+
 
 CFNumberType OCMNumberTypeForObjCType(const char *objcType)
 {

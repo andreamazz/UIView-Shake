@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2006-2015 Erik Doernenburg and contributors
+ *  Copyright (c) 2006-2016 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -14,6 +14,7 @@
  *  under the License.
  */
 
+#import <objc/runtime.h>
 #import "NSInvocation+OCMAdditions.h"
 #import "OCMFunctionsPrivate.h"
 #import "NSMethodSignature+OCMAdditions.h"
@@ -33,56 +34,7 @@
 	for(NSUInteger i = 0, j = 1; i < numArgsRequired; ++i, ++j)
 	{
 		id arg = [arguments objectAtIndex:i];
-		char const *typeEncoding = [sig getArgumentTypeAtIndex:j];
-
-		if((arg == nil) || [arg isKindOfClass:[NSNull class]])
-		{
-			if(typeEncoding[0] == '^')
-			{
-				void *nullPtr = NULL;
-				[inv setArgument:&nullPtr atIndex:j];
-			}
-			else if(typeEncoding[0] == '@')
-			{
-				id nilObj =  nil;
-				[inv setArgument:&nilObj atIndex:j];
-			}
-			else if(OCMNumberTypeForObjCType(typeEncoding))
-			{
-				NSUInteger zero = 0;
-				[inv setArgument:&zero atIndex:j];
-			}
-			else
-			{
-				[NSException raise:NSInvalidArgumentException format:@"Unable to create default value for type %s. All arguments must be specified for this block.", typeEncoding];
-			}
-		}
-		else if (typeEncoding[0] == '@')
-		{
-			[inv setArgument:&arg atIndex:j];
-		}
-		else
-		{
-			if(![arg isKindOfClass:[NSValue class]])
-				[NSException raise:NSInvalidArgumentException format:@"Argument at index %lu should be boxed in NSValue.", (long unsigned)i];
-
-			char const *valEncoding = [arg objCType];
-
-			/// @note Here we allow any data pointer to be passed as a void pointer and
-			/// any numberical types to be passed as arguments to the block.
-			BOOL takesVoidPtr = !strcmp(typeEncoding, "^v") && valEncoding[0] == '^';
-			BOOL takesNumber = OCMNumberTypeForObjCType(typeEncoding) && OCMNumberTypeForObjCType(valEncoding);
-
-			if(!takesVoidPtr && !takesNumber && !OCMEqualTypesAllowingOpaqueStructs(typeEncoding, valEncoding))
-				[NSException raise:NSInvalidArgumentException format:@"Argument type mismatch; Block requires %s but argument provided is %s", typeEncoding, valEncoding];
-
-			NSUInteger argSize;
-			NSGetSizeAndAlignment(typeEncoding, &argSize, NULL);
-			void *argBuffer = malloc(argSize);
-			[arg getValue:argBuffer];
-			[inv setArgument:argBuffer atIndex:j];
-			free(argBuffer);
-		}
+		[inv setArgumentWithObject:arg atIndex:j];
 	}
 
 	return inv;
@@ -90,16 +42,134 @@
 }
 
 
-- (BOOL)hasCharPointerArgument
+static NSString *const OCMRetainedObjectArgumentsKey = @"OCMRetainedObjectArgumentsKey";
+
+- (void)retainObjectArgumentsExcludingObject:(id)objectToExclude
 {
-    NSMethodSignature *signature = [self methodSignature];
-    for(NSUInteger i = 0; i < [signature numberOfArguments]; i++)
+    if(objc_getAssociatedObject(self, OCMRetainedObjectArgumentsKey) != nil)
     {
-        const char *argType = OCMTypeWithoutQualifiers([signature getArgumentTypeAtIndex:i]);
-        if(strcmp(argType, "*") == 0)
-            return YES;
+        // looks like we've retained the arguments already; do nothing else
+        return;
     }
-    return NO;
+
+    NSMutableArray *retainedArguments = [[NSMutableArray alloc] init];
+
+    id target = [self target];
+    if((target != nil) && (target != objectToExclude) && !object_isClass(target))
+    {
+        // Bad things will happen if the target is a block since it's not being
+        // copied. There isn't a very good way to tell if an invocation's target
+        // is a block though (the argument type at index 0 is always "@" even if
+        // the target is a Class or block), and in practice it's OK since you
+        // can't mock a block.
+        [retainedArguments addObject:target];
+    }
+
+    NSUInteger numberOfArguments = [[self methodSignature] numberOfArguments];
+    for(NSUInteger index = 2; index < numberOfArguments; index++)
+    {
+        const char *argumentType = [[self methodSignature] getArgumentTypeAtIndex:index];
+        if(OCMIsObjectType(argumentType) && !OCMIsClassType(argumentType))
+        {
+            id argument;
+            [self getArgument:&argument atIndex:index];
+            if((argument != nil) && (argument != objectToExclude))
+            {
+                if(OCMIsBlockType(argumentType))
+                {
+                    // block types need to be copied in case they're stack blocks
+                    id blockArgument = [argument copy];
+                    [retainedArguments addObject:blockArgument];
+                    [blockArgument release];
+                }
+                else
+                {
+                    [retainedArguments addObject:argument];
+                }
+            }
+        }
+    }
+
+    const char *returnType = [[self methodSignature] methodReturnType];
+    if(OCMIsObjectType(returnType) && !OCMIsClassType(returnType))
+    {
+        id returnValue;
+        [self getReturnValue:&returnValue];
+        if((returnValue != nil) && (returnValue != objectToExclude))
+        {
+            if(OCMIsBlockType(returnType))
+            {
+                id blockReturnValue = [returnValue copy];
+                [retainedArguments addObject:blockReturnValue];
+                [blockReturnValue release];
+            }
+            else
+            {
+                [retainedArguments addObject:returnValue];
+            }
+        }
+    }
+
+    objc_setAssociatedObject(self, OCMRetainedObjectArgumentsKey, retainedArguments, OBJC_ASSOCIATION_RETAIN);
+    [retainedArguments release];
+}
+
+
+- (void)setArgumentWithObject:(id)arg atIndex:(NSInteger)idx
+{
+	const char *typeEncoding = [[self methodSignature] getArgumentTypeAtIndex:idx];
+	if((arg == nil) || [arg isKindOfClass:[NSNull class]])
+	{
+		if(typeEncoding[0] == '^')
+		{
+			void *nullPtr = NULL;
+			[self setArgument:&nullPtr atIndex:idx];
+		}
+		else if(typeEncoding[0] == '@')
+		{
+			id nilObj =  nil;
+			[self setArgument:&nilObj atIndex:idx];
+		}
+		else if(OCMNumberTypeForObjCType(typeEncoding))
+		{
+			NSUInteger argSize;
+			NSGetSizeAndAlignment(typeEncoding, NULL, &argSize);
+			void *argBuffer = calloc(1, argSize);
+			[self setArgument:argBuffer atIndex:idx];
+			free(argBuffer);
+		}
+		else
+		{
+			[NSException raise:NSInvalidArgumentException format:@"Unable to create default value for type '%s'.", typeEncoding];
+		}
+	}
+	else if(OCMIsObjectType(typeEncoding))
+	{
+		[self setArgument:&arg atIndex:idx];
+	}
+	else
+	{
+		if(![arg isKindOfClass:[NSValue class]])
+			[NSException raise:NSInvalidArgumentException format:@"Argument '%@' should be boxed in NSValue.", arg];
+
+		char const *valEncoding = [arg objCType];
+
+		/// @note Here we allow any data pointer to be passed as a void pointer and
+		/// any numerical types to be passed as arguments to the block.
+		BOOL takesVoidPtr = !strcmp(typeEncoding, "^v") && valEncoding[0] == '^';
+		BOOL takesNumber = OCMNumberTypeForObjCType(typeEncoding) && OCMNumberTypeForObjCType(valEncoding);
+
+		if(!takesVoidPtr && !takesNumber && !OCMEqualTypesAllowingOpaqueStructs(typeEncoding, valEncoding))
+			[NSException raise:NSInvalidArgumentException format:@"Argument type mismatch; type of argument required is '%s' but type of value provided is '%s'", typeEncoding, valEncoding];
+
+		NSUInteger argSize;
+		NSGetSizeAndAlignment(typeEncoding, &argSize, NULL);
+		void *argBuffer = malloc(argSize);
+		[arg getValue:argBuffer];
+		[self setArgument:argBuffer atIndex:idx];
+		free(argBuffer);
+	}
+
 }
 
 

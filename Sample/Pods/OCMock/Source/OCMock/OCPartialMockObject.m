@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2009-2015 Erik Doernenburg and contributors
+ *  Copyright (c) 2009-2016 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -76,10 +76,12 @@
 {
     if(realObject != nil)
     {
+        Class partialMockClass = object_getClass(realObject);
         OCMSetAssociatedMockForObject(nil, realObject);
         object_setClass(realObject, [self mockedClass]);
         [realObject release];
         realObject = nil;
+        objc_disposeClassPair(partialMockClass);
     }
     [super stopMocking];
 }
@@ -127,7 +129,7 @@
 
     /* Adding forwarder for most instance methods to allow for verify after run */
     NSArray *methodBlackList = @[@"class", @"forwardingTargetForSelector:", @"methodSignatureForSelector:", @"forwardInvocation:",
-            @"allowsWeakReference", @"retainWeakReference", @"isBlock"];
+            @"allowsWeakReference", @"retainWeakReference", @"isBlock", @"retainCount", @"retain", @"release", @"autorelease"];
     [NSObject enumerateMethodsInClass:mockedClass usingBlock:^(Class cls, SEL sel) {
         if((cls == [NSObject class]) || (cls == [NSProxy class]))
             return;
