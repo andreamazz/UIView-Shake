@@ -41,7 +41,18 @@
 - (void)_shake:(int)times direction:(int)direction currentTimes:(int)current withDelta:(CGFloat)delta speed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completion:(void (^)(void))completionHandler {
     __weak UIView *weakSelf = self;
 	[UIView animateWithDuration:interval animations:^{
-		weakSelf.layer.affineTransform = (shakeDirection == ShakeDirectionHorizontal) ? CGAffineTransformMakeTranslation(delta * direction, 0) : CGAffineTransformMakeTranslation(0, delta * direction);
+        switch (shakeDirection) {
+            case ShakeDirectionVertical:
+                weakSelf.layer.affineTransform = CGAffineTransformMakeTranslation(0, delta * direction);
+                break;
+            case ShakeDirectionRotation:
+                weakSelf.layer.affineTransform = CGAffineTransformMakeRotation(M_PI * delta / 1000.0f * direction);
+                break;
+            case ShakeDirectionHorizontal:
+                weakSelf.layer.affineTransform = CGAffineTransformMakeTranslation(delta * direction, 0);
+            default:
+                break;
+        }
 	} completion:^(BOOL finished) {
 		if(current >= times) {
 			[UIView animateWithDuration:interval animations:^{

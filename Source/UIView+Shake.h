@@ -16,7 +16,9 @@ typedef NS_ENUM(NSInteger, ShakeDirection) {
     /** Shake left and right */
     ShakeDirectionHorizontal,
     /** Shake up and down */
-    ShakeDirectionVertical
+    ShakeDirectionVertical,
+    /** Shake rotation */
+    ShakeDirectionRotation
 };
 
 @interface UIView (Shake)
