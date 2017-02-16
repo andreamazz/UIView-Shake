@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "UIView+Shake"
-  s.version      = "1.2.0"
+  s.version      = "1.3.0"
   s.summary      = "UIView category that adds a shake animation like the password field of the OSX login screen."
   s.homepage     = "https://github.com/andreamazz/UIView-Shake"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
