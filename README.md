@@ -63,18 +63,18 @@ import UIView_Shake
 ```swift
 // Shake
 self.view.shake()
-        
+
 // Shake with the default speed
 self.view.shake(10,              // 10 times
                 withDelta: 5.0   // 5 points wide
 )
-        
+
 // Shake with a custom speed
 self.view.shake(10,              // 10 times
                 withDelta: 5.0,  // 5 points wide
                 speed: 0.03      // 30ms per shake
 )
-        
+
 // Shake with a custom speed and direction
 self.view.shake(10,              // 10 times
                 withDelta: 5.0,  // 5 points wide
@@ -82,6 +82,9 @@ self.view.shake(10,              // 10 times
                 shakeDirection: ShakeDirection.Vertical
 )
 ```
+
+##Direction
+The shake direction is either `.Vertical`, `.Horizontal` or `.Rotation`
 
 ##Completion Handler
 You can also pass a completion block that will be performed as soon as the shake animation stops
@@ -98,12 +101,12 @@ view.shake(10, withDelta: 5) {
 ```
 
 #Author
-[Andrea Mazzini](https://twitter.com/theandreamazz). I'm available for freelance work, feel free to contact me. 
+[Andrea Mazzini](https://twitter.com/theandreamazz). I'm available for freelance work, feel free to contact me.
 
 Want to support the development of [these free libraries](https://cocoapods.org/owners/734)? Buy me a coffee ☕️ via [Paypal](https://www.paypal.me/andreamazzini).  
 
 #Contributors
-Thanks to [everyone](https://github.com/andreamazz/UIView-Shake/graphs/contributors) kind enough to submit a pull request. 
+Thanks to [everyone](https://github.com/andreamazz/UIView-Shake/graphs/contributors) kind enough to submit a pull request.
 
 
 #MIT License
