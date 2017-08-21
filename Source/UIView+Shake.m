@@ -11,7 +11,7 @@
 @implementation UIView (Shake)
 
 - (void)shake {
-    [self shake:10 withDelta:5 speed:0.03];
+    [self shake:5 withDelta:5 speed:0.03];
 }
 
 - (void)shake:(int)times withDelta:(CGFloat)delta {
@@ -64,7 +64,7 @@
 			}];
 			return;
 		}
-		[weakSelf _shake:(times - 1)
+		[weakSelf _shake:times
 		   direction:direction * -1
 		currentTimes:current + 1
 		   withDelta:delta
