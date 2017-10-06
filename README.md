@@ -9,6 +9,10 @@
 
 UIView category that adds a shake animation like the password field of the OSX login screen.
 
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/9Jjp1jzKpTgCg7fq5tVzNmnV/andreamazz/UIView-Shake'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/9Jjp1jzKpTgCg7fq5tVzNmnV/andreamazz/UIView-Shake.svg' />
+</a>
+
 <p align="center">
   <a href='https://appetize.io/app/d4gkmq6mvpb9j2g4wyb077nj2g' alt='Live demo'>
     <img width="50" height="60" src="assets/demo.png"/>
