@@ -35,28 +35,30 @@
 }
 
 - (void)shake:(int)times withDelta:(CGFloat)delta speed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completion:(nullable void (^)(void))completion {
-    [self _shake:times direction:1 currentTimes:0 withDelta:delta speed:interval shakeDirection:shakeDirection completion:completion];
+    [self _shake:times direction:1 currentTimes:0 withDelta:delta speed:interval shakeDirection:shakeDirection initialTransform:self.layer.affineTransform completion:completion];
 }
 
-- (void)_shake:(int)times direction:(int)direction currentTimes:(int)current withDelta:(CGFloat)delta speed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection completion:(void (^)(void))completionHandler {
+- (void)_shake:(int)times direction:(int)direction currentTimes:(int)current withDelta:(CGFloat)delta speed:(NSTimeInterval)interval shakeDirection:(ShakeDirection)shakeDirection initialTransform:(CGAffineTransform)initialTransform completion:(void (^)(void))completionHandler {
     __weak UIView *weakSelf = self;
-	[UIView animateWithDuration:interval animations:^{
+	[[self class] _animateWithDuration:interval animations:^{
+        CGAffineTransform adjustmentTransform;
         switch (shakeDirection) {
             case ShakeDirectionVertical:
-                weakSelf.layer.affineTransform = CGAffineTransformMakeTranslation(0, delta * direction);
+                adjustmentTransform = CGAffineTransformMakeTranslation(0, delta * direction);
                 break;
             case ShakeDirectionRotation:
-                weakSelf.layer.affineTransform = CGAffineTransformMakeRotation(M_PI * delta / 1000.0f * direction);
+                adjustmentTransform = CGAffineTransformMakeRotation(M_PI * delta / 1000.0f * direction);
                 break;
             case ShakeDirectionHorizontal:
-                weakSelf.layer.affineTransform = CGAffineTransformMakeTranslation(delta * direction, 0);
+                adjustmentTransform = CGAffineTransformMakeTranslation(delta * direction, 0);
             default:
                 break;
         }
+        self.layer.affineTransform = CGAffineTransformConcat(initialTransform, adjustmentTransform);
 	} completion:^(BOOL finished) {
 		if(current >= times) {
-			[UIView animateWithDuration:interval animations:^{
-				weakSelf.layer.affineTransform = CGAffineTransformIdentity;
+			[[self class] _animateWithDuration:interval animations:^{
+				weakSelf.layer.affineTransform = initialTransform;
 			} completion:^(BOOL finished){
 				if (completionHandler != nil) {
 					completionHandler();
@@ -70,8 +72,16 @@
 		   withDelta:delta
 			   speed:interval
 	  shakeDirection:shakeDirection
+    initialTransform:initialTransform
           completion:completionHandler];
 	}];
+}
+
+// Helper method to animate with a keyframe. This prevents a "jump" when animating views that have already been transformed
++ (void)_animateWithDuration:(NSTimeInterval)duration animations:(nonnull void (^)(void))animations completion:(nullable void (^)(BOOL finished))completion {
+    [UIView animateKeyframesWithDuration:duration delay:0.0 options:0 animations:^{
+        [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:1.0 animations:animations];
+    } completion:completion];
 }
 
 @end
