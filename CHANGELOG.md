@@ -2,6 +2,7 @@
 All notable changes to this project will be documented in this file.
 `UIView-Shake` adheres to [Semantic Versioning](http://semver.org/).
 
+- `1.5.x` Releases - [1.5.0](#150)  
 - `1.4.x` Releases - [1.4.0](#140)
 - `1.3.x` Releases - [1.3.0](#130)  
 - `1.2.x` Releases - [1.2.0](#120)  
@@ -9,6 +10,10 @@ All notable changes to this project will be documented in this file.
 - `1.0.x` Releases - [1.0](#10) | [1.0.1](#101) | [1.0.2](#102)
 
 ---
+
+## [1.5.0](https://github.com/andreamazz/UIView-Shake/releases/tag/1.5.0)  
+
+Added SPM support [#18](https://github.com/andreamazz/UIView-Shake/pull/18)  
 
 ## [1.4.0](https://github.com/andreamazz/UIView-Shake/releases/tag/1.4.0)
 
